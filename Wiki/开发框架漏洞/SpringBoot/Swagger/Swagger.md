@@ -11,27 +11,27 @@
 	根据Spring的小绿叶logo，或者页面报错 ` Whitelabel Error Page `,有很大可能是Swagger UI的站。
 	使用 burp [遍历Swagger UI路径]()，当一级目录不存在时，尝试拼接二级目录，通过返回包查看完整数据。
 
-	⚠️重点关注：`/api-docs` ｜ `/doc.html` ｜ `/swagger-resources` | `/druid`
+	⚠️重点关注：``` /api-docs ``` ｜ ``` /doc.html ``` ｜ ``` /swagger-resources ``` | ``` /druid ```
 
-	![错误页面截图](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发框架漏洞/SpringBoot/Swagger/image/WhitelableErrorPage.png)
+	![](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发框架漏洞/SpringBoot/Swagger/image/WhitelableErrorPage.png)
 
 #### 步骤二：
 
-	直接在` Swagger UI `页面构造参数发包，接口中有详细的参数介绍.
+	直接在 ` Swagger UI ` 页面构造参数发包，接口中有详细的参数介绍.
 
-	![接口文档截图](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发框架漏洞/SpringBoot/Swagger/image/SwaggerUI1.png)
+	![](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发框架漏洞/SpringBoot/Swagger/image/SwaggerUI1.png)
 	
-	![接口调试截图](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发框架漏洞/SpringBoot/Swagger/image/SwaggerUI2.jpg)
+	![](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发框架漏洞/SpringBoot/Swagger/image/SwaggerUI2.jpg)
 
 #### 步骤三：
 	
 	1. 文件上传接口
 
-		搜索关键字：`upload`	⚠️重点关注`temp、test`类的上传接口
+		搜索关键字：``` upload ``` 	⚠️重点关注 ``` temp、test ``` 类的上传接口
 
 	2. 任意文件下载接口
 
-		搜索关键子：`downLoad	filename path
+		搜索关键字：``` downLoad filename path ```
 
 	3. SQL注入接口
 
