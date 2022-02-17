@@ -11,7 +11,7 @@
 根据Spring的小绿叶logo，或者页面报错 ` Whitelabel Error Page `,有很大可能是Swagger UI的站。
 使用 burp [遍历Swagger UI路径]()，当一级目录不存在时，尝试拼接二级目录，通过返回包查看完整数据。
 
-⚠️重点关注：``` /api-docs ``` ｜ ``` /doc.html ``` ｜ ``` /swagger-resources ``` | ``` /druid ```
+⚠️重点关注：``` /api-docs ``` ｜ ``` /doc.html ``` ｜ ``` /swagger-ui.html ``` ｜ ``` /swagger-resources ``` | ``` /druid ```
 
 ![](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发框架漏洞/SpringBoot/Swagger/image/WhitelableErrorPage.png)
 
