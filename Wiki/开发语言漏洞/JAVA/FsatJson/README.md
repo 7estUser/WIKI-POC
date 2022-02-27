@@ -2,11 +2,12 @@
 
 ## 利用条件：
 
+- Fastjson < 1.2.25
 - 基于ldap的利用方式，适用jdk版本：JDK 11.0.1、8u191、7u201、6u211之前。
 - 基于rmi的利用方式，适用jdk版本：JDK 6u132，JDK 7u131，JDK 8u121之前。
 - （实战首选ldap，支持的jdk版本较多）
-- Fastjson < 1.2.25
 - 1.2.24< Fastjson <1.2.48 版本后增加了反序列化白名单，可以利用特殊构造的json字符串绕过白名单检测
+- < 1.2.47基于黑名单绕过，autoTypeSupport属性为true才能使用，在1.2.25版本之后autoTypeSupport默认为false
 
 ## 利用方法：
 
