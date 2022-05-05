@@ -15,9 +15,9 @@
 
 #### 步骤二：
 
-使用[脚本](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发框架漏洞/SpringBoot/SpringCloud%20Gateway/file/SpringCloudGateway.py)执行RCE命令
+使用[脚本](/file/SpringCloudGateway.py)执行RCE命令
 
-![](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发框架漏洞/SpringBoot/SpringCloud%20Gateway/img/whoami.png)
+![](/img/whoami.png)
 
 #### 步骤三：
 	
