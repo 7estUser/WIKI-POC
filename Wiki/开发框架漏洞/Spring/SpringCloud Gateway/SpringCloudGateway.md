@@ -15,9 +15,9 @@
 
 #### 步骤二：
 
-使用[脚本](/file/SpringCloudGateway.py)执行RCE命令
+使用[脚本](file/SpringCloudGateway.py)执行RCE命令
 
-![](/img/whoami.png)
+![](img/whoami.png)
 
 #### 步骤三：
 	
