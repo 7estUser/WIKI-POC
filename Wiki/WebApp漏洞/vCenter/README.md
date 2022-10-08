@@ -3,6 +3,9 @@
 ## 资产搜索
 title="+ ID_VC_Welcome +"  或者  app="vmware-vCenter"
 
+## 综合利用工具
+https://github.com/Schira4396/VcenterKiller/releases
+
 ## POC
 ### 查看版本信息
 `/sdk/vimServiceVersions.xml`
@@ -25,3 +28,7 @@ https://github.com/horizon3ai/vcenter_saml_login
 - 影响版本：VMware vCenter Server 7.0/6.7/6.5/4.0/3.0
 - 使用脚本工具写入webshell:`python3 CVE-2021-22005.py -u x.x.x.x`
 参考：https://github.com/Jun-5heng/CVE-2021-22005
+
+## 后续利用
+获取vcenter服务器权限后：使用pysharpsphere或SharpSphere对指定目标机器拍摄快照，然后dump镜像到本地，使用Volatility直接对.vmem文件进行内存密码抓取。
+参考：http://www.hackdig.com/07/hack-716736.htm
