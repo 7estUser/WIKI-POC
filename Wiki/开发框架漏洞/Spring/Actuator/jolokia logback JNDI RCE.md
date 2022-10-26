@@ -7,7 +7,7 @@
 - 普通 JNDI 注入受目标 JDK 版本影响，jdk < 6u201/7u191/8u182/11.0.1(LDAP)，但相关环境可绕过
 
 ## 利用方法：
-#### 访问 `/jolokia/list` 接口，查看是否存在 `ch.qos.logback.classic.jmx.JMXConfigurator` 和 `reloadByURL` 关键词。
+#### 访问 `/jolokia/list` 接口，查看是否存在 `ch.qos.logback.classic.jmx.JMXConfigurator` 和 `reloadByURL` 关键词 🚩
 ![](./img/jolokia:list.png)
 #### 托管example.xml文件
 example.xml:  

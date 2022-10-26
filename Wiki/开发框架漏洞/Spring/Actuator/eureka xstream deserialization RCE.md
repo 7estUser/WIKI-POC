@@ -8,7 +8,7 @@
 
 ## 利用方法：
 
-#### 访问`/env`，查找存在`eureka-client`依赖
+#### 访问`/env`，查找存在`eureka-client`依赖 🚩
 #### 架设响应恶意 XStream payload 的网站
 使用 python3 在自己控制的服务器上运行[脚本](https://github.com/7estUser/WIKI-POC/blob/main/Wiki/开发框架漏洞/Spring/Actuator(eureka%20xstream%20deserialization%20RCE)/file/example.py)，并根据实际情况修改脚本中反弹shell的 ip 地址和 端口号。
 #### nc 监听反弹 shell 的端口
