@@ -1,6 +1,6 @@
 # Fortinet FortiOS admin 远程命令执行漏洞
 ## 资产收集
-fofa：`title="FortiProxy"`
+fofa：`title="FortiProxy"`  
 ![](./img/login.png)
 ## POC
 ```html
