@@ -11,4 +11,4 @@ fofa app="ZyXEL-NBG2105"
 GET /login_ok.htm HTTP/1.1
 cookie:login=1
 ```
-![](img/passlogin.jpg)
+![](img/passlogin.png)
