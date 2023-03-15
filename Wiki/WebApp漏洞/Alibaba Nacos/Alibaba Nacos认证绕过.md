@@ -58,4 +58,5 @@ username=nacos&newPassword=abcde
 ```
 ![](img/bypassAdd.png)
 #### 防御方法
-修改默认token.secret.key的值
+修改默认token.secret.key的值  
+默认的token.secret.key=SecretKey012345678901234567890123456789012345678901234567890123456789
