@@ -17,5 +17,5 @@ className=UserService&methodName=loginFromDB&params=["system","0a"]
 - className: 指定UserService类名
 - methodName: 该类调用的方法 loginFromDB
 - params: 第一个参数是内置的用户名（public、service、system）,第二个参数是默认账号的密码（默认：0a）
-![](img/poc.png)
+![](img/poc2.png)
 发送请求后再次刷新页面，即可成功登陆后台
