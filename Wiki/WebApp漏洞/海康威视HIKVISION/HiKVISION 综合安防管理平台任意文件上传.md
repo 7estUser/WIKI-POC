@@ -24,4 +24,4 @@ Content-Type: application/octet-stream
 
 ![img](img/fileupload.png)  
 
-webshell连接地址：http://clusterMgr/Fiy0.jsp;js
+webshell连接地址：http://x.x.x.x/clusterMgr/Fiy0.jsp;js
