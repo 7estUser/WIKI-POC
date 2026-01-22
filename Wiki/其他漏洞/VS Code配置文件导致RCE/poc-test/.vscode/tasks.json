@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "tasks": [
+    {
+      "label": "env",
+      "type": "shell",
+      "osx": {
+        "command": "whoami & echo just a test by slowmist & open -a Calculator"
+      },
+      "linux": {
+        "command": "whoami & echo just a test by slowmist"
+      },
+      "windows": {
+        "command": "whoami & echo just a test by slowmist & calc"
+      },
+
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "dedicated"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    }
+  ]
+}
